@@ -85,7 +85,7 @@
             // 
             this.txtAct.Location = new System.Drawing.Point(91, 345);
             this.txtAct.Name = "txtAct";
-            this.txtAct.Size = new System.Drawing.Size(185, 20);
+            this.txtAct.Size = new System.Drawing.Size(185, 22);
             this.txtAct.TabIndex = 2;
             this.txtAct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAct_KeyDown);
             // 
@@ -117,6 +117,7 @@
             this.Controls.Add(this.txtAct);
             this.Controls.Add(this.txtActLog);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
