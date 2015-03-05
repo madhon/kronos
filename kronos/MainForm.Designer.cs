@@ -87,7 +87,7 @@
             this.txtAct.Name = "txtAct";
             this.txtAct.Size = new System.Drawing.Size(185, 22);
             this.txtAct.TabIndex = 2;
-            this.txtAct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAct_KeyDown);
+            this.txtAct.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnTxtActKeyDown);
             // 
             // lblTime
             // 
