@@ -59,5 +59,23 @@ namespace Kronos.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}\t\t({1} - {2})\t{3}{4}.
+        /// </summary>
+        internal static string ActLogF {
+            get {
+                return ResourceManager.GetString("ActLogF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} h {1} min.
+        /// </summary>
+        internal static string DurationF {
+            get {
+                return ResourceManager.GetString("DurationF", resourceCulture);
+            }
+        }
     }
 }
