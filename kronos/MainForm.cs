@@ -1,64 +1,46 @@
 ﻿namespace Kronos
 {
     using System;
-    using System.Globalization;
     using System.Windows.Forms;
-    using Kronos.Properties;
 
-    internal partial class MainForm : Form
+    internal partial class MainForm : Form, IMainFormView
     {
-        private DateTime lastActTime;
-        private TimeSpan totalDuration;
-
+        private readonly MainFormPresenter presenter;
+        
         public MainForm()
         {
             InitializeComponent();
+            presenter = new MainFormPresenter(this);
+        }
+
+        public string Activity
+        {
+            get { return txtAct.Text; }
+            set { txtAct.Text = value; }
+        }
+
+        public string ActivityLog
+        {
+            get { return txtActLog.Text; }
+            set { txtActLog.Text = value; }
+        }
+
+        public string Time
+        {
+            get { return lblTime.Text; }
+            set { lblTime.Text = value; }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            lblTime.Text = string.Empty;
-            lastActTime = DateTime.Now;
+            presenter.OnLoad();
         }
 
         private void OnAddActivity(object sender, EventArgs e)
         {
-            if (txtAct.Text.ToUpperInvariant() == "ARRIVED")
-            {
-                lastActTime = DateTime.Now;
-                TimeSpan arrived = lastActTime - lastActTime;
-                AddLineToLog(arrived, lastActTime, lastActTime, "Arrived");
-                return;
-            }
-
-            DateTime currTime = DateTime.Now;
-            TimeSpan activityDuration = currTime - lastActTime;
-            totalDuration += activityDuration;
-
-            AddLineToLog(activityDuration, lastActTime, currTime, txtAct.Text);
-
-            if (!txtAct.Text.EndsWith("**", StringComparison.OrdinalIgnoreCase))
-            {
-                UpdateTotalDuration();
-            }
-
-            lastActTime = currTime;
-
-            txtAct.Text = string.Empty;
+            presenter.OnAddActivity();
         }
-
-        private void AddLineToLog(TimeSpan duration, DateTime startTime, DateTime endTime, string activity)
-        {
-            string durationSring = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours, duration.Minutes);
-            string message = string.Format(CultureInfo.CurrentCulture, Resources.ActLogF, durationSring, startTime.ToShortTimeString(), endTime.ToShortTimeString(), activity, Environment.NewLine);
-            txtActLog.Text += message;
-        }
-
-        private void UpdateTotalDuration()
-        {
-            lblTime.Text = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, totalDuration.Hours, totalDuration.Minutes);
-        }
-
+        
         private void OnTxtActKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActLogF" xml:space="preserve">
-    <value>{0}\t\t({1} - {2})\t{3}{4}</value>
+    <value>{0}  ({1} - {2})  {3}{4}</value>
   </data>
   <data name="DurationF" xml:space="preserve">
     <value>{0} h {1} min</value>
