@@ -4,27 +4,19 @@
     using System.Globalization;
     using Kronos.Properties;
 
-    internal class MainFormPresenter
+    internal class MainFormPresenter : Presenter<IMainFormView>
     {
-        private readonly IMainFormView view;
-
         private DateTime lastActTime;
         private TimeSpan totalDuration;
 
-        public MainFormPresenter(IMainFormView view)
+        public MainFormPresenter(IMainFormView view) : base(view)
         {
-            this.view = view;
+            view.AddActivity += OnAddActivity;
         }
 
-        public void OnLoad()
+        public void OnAddActivity(object sender, EventArgs e)
         {
-            this.view.Time = string.Empty;
-            this.lastActTime = DateTime.Now;
-        }
-
-        public void OnAddActivity()
-        {
-            if (this.view.Activity.ToUpperInvariant() == "ARRIVED")
+            if (this.View.Activity.ToUpperInvariant() == "ARRIVED")
             {
                 this.lastActTime = DateTime.Now;
                 TimeSpan arrived = this.lastActTime - this.lastActTime;
@@ -36,28 +28,34 @@
             TimeSpan activityDuration = currTime - this.lastActTime;
             this.totalDuration += activityDuration;
 
-            this.AddLineToLog(activityDuration, this.lastActTime, currTime, this.view.Activity);
+            this.AddLineToLog(activityDuration, this.lastActTime, currTime, this.View.Activity);
 
-            if (!this.view.Activity.EndsWith("**", StringComparison.OrdinalIgnoreCase))
+            if (!this.View.Activity.EndsWith("**", StringComparison.OrdinalIgnoreCase))
             {
                 this.UpdateTotalDuration();
             }
 
             this.lastActTime = currTime;
 
-            this.view.Activity = string.Empty;
+            this.View.Activity = string.Empty;
+        }
+
+        protected override void OnViewLoad(object sender, EventArgs e)
+        {
+            this.View.Time = string.Empty;
+            this.lastActTime = DateTime.Now;
         }
 
         private void AddLineToLog(TimeSpan duration, DateTime startTime, DateTime endTime, string activity)
         {
             string durationSring = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours, duration.Minutes);
             string message = string.Format(CultureInfo.CurrentCulture, Resources.ActLogF, durationSring, startTime.ToShortTimeString(), endTime.ToShortTimeString(), activity, Environment.NewLine);
-            this.view.ActivityLog += message;
+            this.View.ActivityLog += message;
         }
 
         private void UpdateTotalDuration()
         {
-            this.view.Time = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, this.totalDuration.Hours, this.totalDuration.Minutes);
+            this.View.Time = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, this.totalDuration.Hours, this.totalDuration.Minutes);
         }
     }
 }

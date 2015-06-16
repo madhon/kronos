@@ -11,7 +11,13 @@
         {
             InitializeComponent();
             presenter = new MainFormPresenter(this);
+
+            InvokeInitialize(EventArgs.Empty);
         }
+
+        public event EventHandler Initialize;
+
+        public event EventHandler AddActivity;
 
         public string Activity
         {
@@ -31,14 +37,22 @@
             set { lblTime.Text = value; }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        public void InvokeInitialize(EventArgs e)
         {
-            presenter.OnLoad();
+            EventHandler handler = Initialize;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
 
         private void OnAddActivity(object sender, EventArgs e)
         {
-            presenter.OnAddActivity();
+            EventHandler handler = AddActivity;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
         
         private void OnTxtActKeyDown(object sender, KeyEventArgs e)
