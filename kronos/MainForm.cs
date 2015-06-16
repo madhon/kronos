@@ -17,7 +17,7 @@
 
         public event EventHandler Initialize;
 
-        public event EventHandler AddActivity;
+        public event EventHandler AddActivity = delegate { };
 
         public string Activity
         {
@@ -39,20 +39,12 @@
 
         public void InvokeInitialize(EventArgs e)
         {
-            EventHandler handler = Initialize;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            Initialize.RaiseEvent(this, e);
         }
 
         private void OnAddActivity(object sender, EventArgs e)
         {
-            EventHandler handler = AddActivity;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            AddActivity.RaiseEvent(sender, e);
         }
         
         private void OnTxtActKeyDown(object sender, KeyEventArgs e)

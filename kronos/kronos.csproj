@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IMainFormView.cs" />
     <Compile Include="IView.cs" />
