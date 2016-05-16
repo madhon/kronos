@@ -2,9 +2,11 @@
 {
     using System;
     using System.Windows.Forms;
+    using JetBrains.Annotations;
 
     internal partial class MainForm : Form, IMainFormView
     {
+        [UsedImplicitly]
         private readonly MainFormPresenter presenter;
         
         public MainForm()
@@ -37,16 +39,10 @@
             set { lblTime.Text = value; }
         }
 
-        public void InvokeInitialize(EventArgs e)
-        {
-            Initialize.RaiseEvent(this, e);
-        }
+        public void InvokeInitialize(EventArgs e) => Initialize.RaiseEvent(this, e);
 
-        private void OnAddActivity(object sender, EventArgs e)
-        {
-            AddActivity.RaiseEvent(sender, e);
-        }
-        
+        private void OnAddActivity(object sender, EventArgs e) => AddActivity.RaiseEvent(sender, e);
+
         private void OnTxtActKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
