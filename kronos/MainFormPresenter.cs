@@ -48,11 +48,11 @@
 
         private void AddLineToLog(TimeSpan duration, DateTime startTime, DateTime endTime, string activity)
         {
-            string durationSring = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours, duration.Minutes);
+            string durationSring = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours.ToString(), duration.Minutes.ToString());
             string message = string.Format(CultureInfo.CurrentCulture, Resources.ActLogF, durationSring, startTime.ToShortTimeString(), endTime.ToShortTimeString(), activity, Environment.NewLine);
             View.ActivityLog += message;
         }
 
-        private void UpdateTotalDuration() => View.Time = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, totalDuration.Hours, totalDuration.Minutes);
+        private void UpdateTotalDuration() => View.Time = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, totalDuration.Hours.ToString(), totalDuration.Minutes.ToString());
     }
 }
