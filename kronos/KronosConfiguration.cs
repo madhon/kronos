@@ -5,13 +5,7 @@
 
     internal class KronosConfiguration
     {
-        public string DataFile
-        {
-            get
-            {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Kronos",
-                    "Kronos.db");
-            }
-        }
+        public string DataFile => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Kronos",
+            "Kronos.db");
     }
 }
