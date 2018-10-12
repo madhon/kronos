@@ -6,12 +6,7 @@
     {
         public Presenter(TView view)
         {
-            if (view == null)
-            {
-                throw new ArgumentNullException(nameof(view));
-            }
-
-            this.View = view;
+            this.View = view ?? throw new ArgumentNullException(nameof(view));
             this.View.Initialize += this.OnViewInitialize;
             this.View.Load += this.OnViewLoad;
         }
