@@ -23,20 +23,20 @@
 
         public string Activity
         {
-            get { return txtAct.Text; }
-            set { txtAct.Text = value; }
+            get => txtAct.Text;
+            set => txtAct.Text = value;
         }
 
         public string ActivityLog
         {
-            get { return txtActLog.Text; }
-            set { txtActLog.Text = value; }
+            get => txtActLog.Text;
+            set => txtActLog.Text = value;
         }
 
         public string Time
         {
-            get { return lblTime.Text; }
-            set { lblTime.Text = value; }
+            get => lblTime.Text;
+            set => lblTime.Text = value;
         }
 
         public void InvokeInitialize(EventArgs e) => Initialize.RaiseEvent(this, e);
