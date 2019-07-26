@@ -17,6 +17,30 @@
             InvokeInitialize(EventArgs.Empty);
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == NativeMethods.WM_SHOWME)
+            {
+                ShowMe();
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void ShowMe()
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
+
+            bool top = TopMost;
+
+            TopMost = true;
+
+            TopMost = top;
+        }
+
         public event EventHandler Initialize;
 
         public event EventHandler AddActivity = delegate { };
