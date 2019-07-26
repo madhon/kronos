@@ -84,6 +84,7 @@
             // 
             // cmdAddAct
             // 
+            this.availabilityExtender.SetDetermineAvailability(this.cmdAddAct, true);
             resources.ApplyResources(this.cmdAddAct, "cmdAddAct");
             this.cmdAddAct.Name = "cmdAddAct";
             this.cmdAddAct.UseVisualStyleBackColor = true;

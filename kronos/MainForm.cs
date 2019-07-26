@@ -4,7 +4,7 @@
     using System.Windows.Forms;
     using JetBrains.Annotations;
 
-    internal partial class MainForm : Form, IMainFormView
+    internal partial class MainForm : BaseForm, IMainFormView
     {
         [UsedImplicitly]
         private readonly MainFormPresenter presenter;
