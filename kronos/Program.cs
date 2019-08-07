@@ -1,10 +1,14 @@
 ﻿namespace Kronos
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.Threading;
     using System.Windows.Forms;
+    using Microsoft.AppCenter;
+    using Microsoft.AppCenter.Analytics;
+    using Microsoft.AppCenter.Crashes;
 
     public static class Program
     {
@@ -23,12 +27,20 @@
 
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
+
+
+                    var countryCode = RegionInfo.CurrentRegion.TwoLetterISORegionName;
+                    AppCenter.SetCountryCode(countryCode);
+
+                    AppCenter.Start("6fc88650-0a91-4112-aa32-fa32e250db61",
+                        typeof(Analytics), typeof(Crashes));
+
                     Application.Run(new MainForm());
                 }
                 catch (Exception ex)
                 {
 
-                    HandleException(ex);
+                    ExceptionManager.HandleException(ex);
                 }
             }
             else
@@ -40,17 +52,12 @@
 
         private static void OnThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            HandleException(e.Exception);
+            ExceptionManager.HandleException(e.Exception);
         }
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            HandleException(e.ExceptionObject as Exception);
-        }
-
-        private static void HandleException(Exception e)
-        {
-            Console.Write(e.Message + Environment.NewLine + e.StackTrace);
+            ExceptionManager.HandleException(e.ExceptionObject as Exception);
         }
 
         private static void PerformProfileOptimisation()

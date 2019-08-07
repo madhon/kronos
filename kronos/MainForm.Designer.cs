@@ -1,5 +1,7 @@
 ﻿namespace Kronos
 {
+    using System.Windows.Forms;
+
     partial class MainForm
     {
         /// <summary>
@@ -36,7 +38,7 @@
             this.txtActLog = new System.Windows.Forms.TextBox();
             this.txtAct = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
-            this.cmdAddAct = new System.Windows.Forms.Button();
+            this.cmdAddAct = new Kronos.Controls.TelemetryButton();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +94,7 @@
             // 
             // MainForm
             // 
+            this.AppCenterFormName = "MainForm";
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cmdAddAct);
@@ -119,7 +122,7 @@
         private System.Windows.Forms.TextBox txtActLog;
         private System.Windows.Forms.TextBox txtAct;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Button cmdAddAct;
+        private Kronos.Controls.TelemetryButton cmdAddAct;
     }
 }
 

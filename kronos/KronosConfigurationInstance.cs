@@ -2,7 +2,7 @@
 {
     using System;
     using System.IO;
-    using Jil;
+    using Newtonsoft.Json;
 
     internal class KronosConfigurationInstance
     {
@@ -17,7 +17,7 @@
             var configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
                 "Madhon", "Kronos", "appSettings.json");
 
-            Config = JSON.Deserialize<KronosConfiguration>(File.ReadAllText(configFile));
+            Config = JsonConvert.DeserializeObject<KronosConfiguration>(File.ReadAllText(configFile));
         }
     }
 }

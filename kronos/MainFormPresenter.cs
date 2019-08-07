@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using Kronos.Properties;
+    using Microsoft.AppCenter.Analytics;
 
     internal class MainFormPresenter : Presenter<IMainFormView>
     {
@@ -38,6 +39,8 @@
             lastActTime = currTime;
 
             View.Activity = string.Empty;
+
+            Analytics.TrackEvent("OnAddActivity");
         }
 
         protected override void OnViewLoad(object sender, EventArgs e)
