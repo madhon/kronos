@@ -20,9 +20,8 @@
         public static void HandleException(Exception ex, string caption, IWin32Window owner)
         {
             Crashes.TrackError(ex);
-            
-            var box = new ExceptionMessageBox(ex.UnWrap());
-            box.Caption = caption;
+
+            var box = new ExceptionMessageBox(ex.UnWrap()) {Caption = caption};
             box.Show(owner);
         }
     }
