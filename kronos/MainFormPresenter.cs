@@ -19,14 +19,14 @@
         {
             if (View.Activity.ToUpperInvariant() == "ARRIVED")
             {
-                lastActTime = DateTime.Now;
-                TimeSpan arrived = lastActTime - lastActTime;
+                lastActTime = DateTime.UtcNow;
+                var arrived = lastActTime - lastActTime;
                 AddLineToLog(arrived, lastActTime, lastActTime, "Arrived");
                 return;
             }
 
-            DateTime currTime = DateTime.Now;
-            TimeSpan activityDuration = currTime - lastActTime;
+            var currTime = DateTime.UtcNow;
+            var activityDuration = currTime - lastActTime;
             totalDuration += activityDuration;
 
             AddLineToLog(activityDuration, lastActTime, currTime, View.Activity);
@@ -51,8 +51,8 @@
 
         private void AddLineToLog(TimeSpan duration, DateTime startTime, DateTime endTime, string activity)
         {
-            string durationSring = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours.ToString(), duration.Minutes.ToString());
-            string message = string.Format(CultureInfo.CurrentCulture, Resources.ActLogF, durationSring, startTime.ToShortTimeString(), endTime.ToShortTimeString(), activity, Environment.NewLine);
+            var durationString = string.Format(CultureInfo.CurrentCulture, Resources.DurationF, duration.Hours.ToString(), duration.Minutes.ToString());
+            var message = string.Format(CultureInfo.CurrentCulture, Resources.ActLogF, durationString, startTime.ToShortTimeString(), endTime.ToShortTimeString(), activity, Environment.NewLine);
             View.ActivityLog += message;
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace Kronos
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.Windows.Forms;
@@ -8,13 +9,13 @@
     [ProvideProperty("DetermineAvailability", typeof(Control))]
     public class AvailabilityExtender : Component, IExtenderProvider
     {
-        private readonly Hashtable _oConfigurationTable;
+        //private readonly Hashtable _oConfigurationTable;
+
+        private readonly Dictionary<Control, bool> _oConfigurationTable;
+
         public AvailabilityState StateOfExtender { get; private set; }
 
-        public AvailabilityExtender()
-        {
-            _oConfigurationTable = new Hashtable();
-        }
+        public AvailabilityExtender() => _oConfigurationTable = new Dictionary<Control, bool>();
 
         public bool CanExtend(object extendee)
         {
@@ -25,7 +26,7 @@
         [DefaultValue(false)]
         public bool GetDetermineAvailability(Control control)
         {
-            if (_oConfigurationTable[control] == null)
+            if (_oConfigurationTable[control] is object)
             {
                 return false;
             }

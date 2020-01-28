@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Forms;
     using Microsoft.AppCenter.Crashes;
-    using Microsoft.NetEnterpriseServers;
+    using Microsoft.SqlServer.MessageBox;
 
     internal static class ExceptionManager
     {
