@@ -14,13 +14,10 @@
 
         public static TItem GetOrCreate<TItem>(string key, Func<TItem> createItem)
         {
-            TItem cacheEntry = default(TItem);
-
-            if (!TryGetValue(key, out cacheEntry))
+            if (!TryGetValue(key, out TItem cacheEntry))
             {
                 cacheEntry = createItem();
                 Cache.Set(key, cacheEntry, CachePolicy);
-
             }
 
             return cacheEntry;
@@ -28,9 +25,7 @@
 
         public static async Task<TItem> GetOrCreate<TItem>(string key, Func<Task<TItem>> createItem)
         {
-            TItem cacheEntry = default(TItem);
-
-            if (!TryGetValue(key, out cacheEntry))
+            if (!TryGetValue(key, out TItem cacheEntry))
             {
                 cacheEntry = await createItem().ConfigureAwait(false);
                 Cache.Set(key, cacheEntry, CachePolicy);
