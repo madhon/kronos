@@ -7,17 +7,12 @@
 
     internal static class ExceptionManager
     {
-        public static void HandleException(Exception ex)
-        {
-            HandleException(ex, "Kronos", null);
-        }
-
         public static void HandleException(Exception ex, string caption)
         {
             HandleException(ex, caption, null);
         }
 
-        public static void HandleException(Exception ex, string caption, IWin32Window owner)
+        public static void HandleException(Exception ex, string caption = "Kronos", IWin32Window owner = null)
         {
             Crashes.TrackError(ex);
 
