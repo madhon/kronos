@@ -8,7 +8,7 @@
 
     public class TelemetryButton : Button
     {
-        [EditorBrowsable] public string EventName { get; set; }
+        [EditorBrowsable] public string EventName { get; set; } = string.Empty;
 
         [EditorBrowsable] public bool IsTimed { get; set; }
 

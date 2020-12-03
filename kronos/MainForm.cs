@@ -2,11 +2,9 @@
 {
     using System;
     using System.Windows.Forms;
-    using JetBrains.Annotations;
 
     internal partial class MainForm : BaseForm, IMainFormView
     {
-        [UsedImplicitly]
         private readonly MainFormPresenter presenter;
         
         public MainForm()
@@ -41,9 +39,9 @@
             TopMost = top;
         }
 
-        public event EventHandler Initialize;
+        public event EventHandler? Initialize;
 
-        public event EventHandler AddActivity = delegate { };
+        public event EventHandler? AddActivity = delegate { };
 
         public string Activity
         {
@@ -63,9 +61,9 @@
             set => lblTime.Text = value;
         }
 
-        public void InvokeInitialize(EventArgs e) => Initialize.RaiseEvent(this, e);
+        public void InvokeInitialize(EventArgs e) => Initialize?.RaiseEvent(this, e);
 
-        private void OnAddActivity(object sender, EventArgs e) => AddActivity.RaiseEvent(sender, e);
+        private void OnAddActivity(object sender, EventArgs e) => AddActivity?.RaiseEvent(sender, e);
 
         private void OnTxtActKeyDown(object sender, KeyEventArgs e)
         {

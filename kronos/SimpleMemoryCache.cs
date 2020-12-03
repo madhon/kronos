@@ -17,7 +17,7 @@
             if (!TryGetValue(key, out TItem cacheEntry))
             {
                 cacheEntry = createItem();
-                Cache.Set(key, cacheEntry, CachePolicy);
+                Cache.Set(key, cacheEntry!, CachePolicy);
             }
 
             return cacheEntry;
@@ -28,7 +28,7 @@
             if (!TryGetValue(key, out TItem cacheEntry))
             {
                 cacheEntry = await createItem().ConfigureAwait(false);
-                Cache.Set(key, cacheEntry, CachePolicy);
+                Cache.Set(key, cacheEntry!, CachePolicy);
             }
 
             return cacheEntry;
@@ -37,15 +37,20 @@
         private static bool TryGetValue<T>(string key, out T value)
         {
             var result = false;
-            value = default(T);
+
+#pragma warning disable CS8601 // Possible null reference assignment.
+            value = default;
+#pragma warning restore CS8601 // Possible null reference assignment.
 
             var item = Cache.Get(key);
 
-            if (item != null)
+            if (item == null)
             {
-                value = (T) item;
-                result = true;
+                return result;
             }
+
+            value = (T) item;
+            result = true;
 
             return result;
         }

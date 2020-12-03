@@ -7,17 +7,17 @@
         public Presenter(TView view)
         {
             View = view ?? throw new ArgumentNullException(nameof(view));
-            View.Initialize += this.OnViewInitialize;
-            View.Load += this.OnViewLoad;
+            View.Initialize += OnViewInitialize;
+            View.Load += OnViewLoad;
         }
 
         public TView View { get; set; }
 
-        protected virtual void OnViewInitialize(object sender, EventArgs e) 
+        protected virtual void OnViewInitialize(object? sender, EventArgs e) 
         { 
         }
 
-        protected virtual void OnViewLoad(object sender, EventArgs e) 
+        protected virtual void OnViewLoad(object? sender, EventArgs e) 
         {
         }
     }

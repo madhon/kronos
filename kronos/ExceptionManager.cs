@@ -1,6 +1,7 @@
 ﻿namespace Kronos
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Forms;
     using Microsoft.AppCenter.Crashes;
     using Microsoft.SqlServer.MessageBox;
@@ -9,14 +10,19 @@
     {
         public static void HandleException(Exception ex, string caption)
         {
-            HandleException(ex, caption, null);
+            HandleException(ex!, caption, null!);
         }
 
-        public static void HandleException(Exception ex, string caption = "Kronos", IWin32Window owner = null)
+        public static void HandleException(Exception? ex, string caption = "Kronos", IWin32Window? owner = null)
         {
-            Crashes.TrackError(ex);
+            if (ex == null)
+            {
+                return;
+            }
 
-            var box = new ExceptionMessageBox(ex.UnWrap()) {Caption = caption};
+            Crashes.TrackError(ex!);
+
+            var box = new ExceptionMessageBox(ex!.UnWrap()) {Caption = caption};
             box.Show(owner);
         }
     }

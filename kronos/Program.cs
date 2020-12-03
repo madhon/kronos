@@ -12,7 +12,7 @@
 
     public static class Program
     {
-        internal static Mutex Mtx = new Mutex(true, "EBB8D9AE-EB98-48D3-861E-F47609501EC6");
+        private static readonly Mutex Mtx = new Mutex(true, "EBB8D9AE-EB98-48D3-861E-F47609501EC6");
 
         [STAThread]
         public static void Main()
@@ -57,7 +57,9 @@
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            ExceptionManager.HandleException(e.ExceptionObject as Exception);
+            var ex = e.ExceptionObject as Exception;
+
+            ExceptionManager.HandleException(ex);
         }
 
         private static void PerformProfileOptimisation()

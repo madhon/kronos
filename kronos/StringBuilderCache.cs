@@ -1,4 +1,5 @@
-﻿namespace Kronos
+﻿// ReSharper disable InconsistentNaming
+namespace Kronos
 {
     using System;
     using System.Text;
@@ -7,9 +8,9 @@
     public static class StringBuilderCache
     {
         [ThreadStatic]
-        private static StringBuilder _perThread;
+        private static StringBuilder? _perThread;
 
-        private static StringBuilder _shared;
+        private static StringBuilder? _shared;
 
         private const int DefaultCapacity = 0x10;
 
@@ -18,12 +19,12 @@
             var tmp = _perThread;
             if (tmp != null)
             {
-                _perThread = null;
+                _perThread = null!;
                 tmp.Length = 0;
                 return tmp;
             }
 
-            tmp = Interlocked.Exchange(ref _shared, null);
+            tmp = Interlocked.Exchange(ref _shared, null!);
             if (tmp == null) return new StringBuilder(capacity);
             tmp.Length = 0;
             return tmp;
@@ -45,7 +46,6 @@
 
         public static void Recycle(StringBuilder builder)
         {
-            if (builder == null) return;
             if (_perThread == null)
             {
                 _perThread = builder;
