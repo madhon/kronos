@@ -15,35 +15,37 @@
             view.AddActivity += OnAddActivity;
         }
 
-        public void OnAddActivity(object sender, EventArgs e)
+        public void OnAddActivity(object? sender, EventArgs e)
         {
-            if (View.Activity.ToUpperInvariant() == "ARRIVED")
+            if (sender == null) throw new ArgumentNullException(nameof(sender));
+
+            if (string.Equals(View.Activity, "ARRIVED", StringComparison.OrdinalIgnoreCase))
             {
                 lastActTime = DateTime.UtcNow;
-                var arrived = lastActTime - lastActTime;
+                var arrived = TimeSpan.FromSeconds(0);
                 AddLineToLog(arrived, lastActTime, lastActTime, "Arrived");
                 return;
             }
 
-            var currTime = DateTime.UtcNow;
-            var activityDuration = currTime - lastActTime;
+            var currentTime = DateTime.UtcNow;
+            var activityDuration = currentTime - lastActTime;
             totalDuration += activityDuration;
 
-            AddLineToLog(activityDuration, lastActTime, currTime, View.Activity);
+            AddLineToLog(activityDuration, lastActTime, currentTime, View.Activity);
 
-            if (!View.Activity.EndsWith("**", StringComparison.OrdinalIgnoreCase))
+            if (!View.Activity.EndsWith("**", StringComparison.Ordinal))
             {
                 UpdateTotalDuration();
             }
 
-            lastActTime = currTime;
+            lastActTime = currentTime;
 
             View.Activity = string.Empty;
 
             Analytics.TrackEvent("OnAddActivity");
         }
 
-        protected override void OnViewLoad(object sender, EventArgs e)
+        protected override void OnViewLoad(object? sender, EventArgs e)
         {
             View.Time = string.Empty;
             lastActTime = DateTime.Now;

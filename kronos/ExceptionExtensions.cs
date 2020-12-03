@@ -11,9 +11,11 @@
             {
                 var tiex = ex as TargetInvocationException;
                 if (tiex == null)
+                {
                     return ex;
+                }
 
-                ex = tiex.InnerException;
+                ex = tiex.InnerException!;
             }
         }
     }

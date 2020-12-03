@@ -9,8 +9,6 @@
     [ProvideProperty("DetermineAvailability", typeof(Control))]
     public class AvailabilityExtender : Component, IExtenderProvider
     {
-        //private readonly Hashtable _oConfigurationTable;
-
         private readonly Dictionary<Control, bool> _oConfigurationTable;
 
         public AvailabilityState StateOfExtender { get; private set; }
@@ -26,7 +24,9 @@
         [DefaultValue(false)]
         public bool GetDetermineAvailability(Control control)
         {
+#pragma warning disable CS0183 // 'is' expression's given expression is always of the provided type
             if (_oConfigurationTable[control] is object)
+#pragma warning restore CS0183 // 'is' expression's given expression is always of the provided type
             {
                 return false;
             }

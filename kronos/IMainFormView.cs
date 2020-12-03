@@ -4,7 +4,7 @@
 
     internal interface IMainFormView : IView
     {
-        event EventHandler AddActivity;
+        event EventHandler? AddActivity;
 
         string Activity { get; set; }
 

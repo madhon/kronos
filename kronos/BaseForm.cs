@@ -18,7 +18,7 @@
 
         public void SetDetermineAvailability(Control control, bool associate) => availabilityExtender.SetDetermineAvailability(control, associate);
 
-        [EditorBrowsable] public string AppCenterFormName { get; set; }
+        [EditorBrowsable] public string AppCenterFormName { get; set; } = string.Empty;
 
         /// <summary>
         /// Raises the <see cref="E:Load" /> event.
@@ -44,14 +44,16 @@
 
         private void LogPageView()
         {
-            if (!this.DesignMode && !_viewLogged)
+            if (this.DesignMode || _viewLogged)
             {
-                Analytics.TrackEvent("FormUseDuration", new Dictionary<string, string> {
-                    { "Duration", (DateTime.UtcNow - _openTime).TotalMilliseconds.ToString() }
-                });
-
-                _viewLogged = true;
+                return;
             }
+
+            Analytics.TrackEvent("FormUseDuration", new Dictionary<string, string> {
+                { "Duration", (DateTime.UtcNow - _openTime).TotalMilliseconds.ToString() }
+            });
+
+            _viewLogged = true;
         }
 
     }
