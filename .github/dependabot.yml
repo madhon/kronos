@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: LibLog
+    versions:
+    - "> 4.2.6"
+  - dependency-name: Microsoft.AppCenter.Analytics
+    versions:
+    - 4.2.0
+  - dependency-name: Microsoft.AppCenter.Crashes
+    versions:
+    - 4.2.0
