@@ -17,7 +17,7 @@
             var configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
                 "Madhon", "Kronos", "appSettings.json");
 
-            Config = JsonConvert.DeserializeObject<KronosConfiguration>(File.ReadAllText(configFile));
+            Config = JsonConvert.DeserializeObject<KronosConfiguration>(File.ReadAllText(configFile))!;
         }
     }
 }
