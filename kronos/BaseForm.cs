@@ -1,10 +1,7 @@
 ﻿namespace Kronos
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Windows.Forms;
-    using Microsoft.AppCenter.Analytics;
 
     public partial class BaseForm : Form
     {
@@ -17,8 +14,6 @@
         }
 
         public void SetDetermineAvailability(Control control, bool associate) => availabilityExtender.SetDetermineAvailability(control, associate);
-
-        [EditorBrowsable] public string AppCenterFormName { get; set; } = string.Empty;
 
         /// <summary>
         /// Raises the <see cref="E:Load" /> event.
@@ -49,9 +44,7 @@
                 return;
             }
 
-            Analytics.TrackEvent("FormUseDuration", new Dictionary<string, string> {
-                { "Duration", (DateTime.UtcNow - _openTime).TotalMilliseconds.ToString() }
-            });
+            var duration = (DateTime.UtcNow - _openTime).TotalMilliseconds;
 
             _viewLogged = true;
         }

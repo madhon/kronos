@@ -1,14 +1,10 @@
 ﻿namespace Kronos
 {
     using System;
-    using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.Threading;
     using System.Windows.Forms;
-    using Microsoft.AppCenter;
-    using Microsoft.AppCenter.Analytics;
-    using Microsoft.AppCenter.Crashes;
 
     public static class Program
     {
@@ -27,13 +23,6 @@
 
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-
-
-                    var countryCode = RegionInfo.CurrentRegion.TwoLetterISORegionName;
-                    AppCenter.SetCountryCode(countryCode);
-
-                    AppCenter.Start("6fc88650-0a91-4112-aa32-fa32e250db61",
-                        typeof(Analytics), typeof(Crashes));
 
                     Application.Run(new MainForm());
                 }

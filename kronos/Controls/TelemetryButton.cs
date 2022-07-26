@@ -1,10 +1,8 @@
 ﻿namespace Kronos.Controls
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Forms;
-    using Microsoft.AppCenter.Analytics;
 
     public class TelemetryButton : Button
     {
@@ -19,10 +17,7 @@
 
             if (IsTimed)
             {
-                Analytics.TrackEvent(EventName, new Dictionary<string, string>
-                {
-                    {"Duration", (DateTime.UtcNow - startTime).TotalMilliseconds.ToString()}
-                });
+                var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
             }
         }
     }
