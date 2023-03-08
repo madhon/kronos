@@ -2,9 +2,9 @@
 {
     using System;
     using System.IO;
-    using Newtonsoft.Json;
+    using System.Text.Json;
 
-    internal class KronosConfigurationInstance
+    public class KronosConfigurationInstance
     {
         private static readonly Lazy<KronosConfiguration> lazy = new Lazy<KronosConfiguration>(() => new KronosConfiguration());
 
@@ -17,7 +17,7 @@
             var configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
                 "Madhon", "Kronos", "appSettings.json");
 
-            Config = JsonConvert.DeserializeObject<KronosConfiguration>(File.ReadAllText(configFile))!;
+            Config = JsonSerializer.Deserialize<KronosConfiguration>(File.ReadAllText(configFile), KronosConfigurationSerializationContext.Default.KronosConfiguration)!;
         }
     }
 }
