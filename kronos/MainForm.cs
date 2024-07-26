@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Forms;
 
-    internal partial class MainForm : BaseForm, IMainFormView
+    internal sealed partial class MainForm : BaseForm, IMainFormView
     {
         private readonly MainFormPresenter presenter;
         

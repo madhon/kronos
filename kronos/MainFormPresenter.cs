@@ -4,7 +4,7 @@
     using System.Globalization;
     using Kronos.Properties;
 
-    internal class MainFormPresenter : Presenter<IMainFormView>
+    internal sealed class MainFormPresenter : Presenter<IMainFormView>
     {
         private DateTime lastActTime;
         private TimeSpan totalDuration;
@@ -14,9 +14,9 @@
             view.AddActivity += OnAddActivity;
         }
 
-        public void OnAddActivity(object? sender, EventArgs e)
+        private void OnAddActivity(object? sender, EventArgs e)
         {
-            if (sender == null) throw new ArgumentNullException(nameof(sender));
+            ArgumentNullException.ThrowIfNull(sender);
 
             if (View.Activity.Equals("ARRIVED", StringComparison.OrdinalIgnoreCase))
             {

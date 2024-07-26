@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>Kronos</RootNamespace>
@@ -18,10 +18,14 @@
     <NoWarn>1701;1702;CA1416</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <WarningsAsErrors>$(WarningsAsErrors);SYSLIB1045;CA1309;CA1310;CA1831;CA1832;CA1833;CA1827;CA1860;CA1820;CA1829;CA1845;CA1846;CA1848;CA1851;CA1852;IDE0028</WarningsAsErrors>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
-    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
