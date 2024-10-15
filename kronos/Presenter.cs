@@ -2,16 +2,16 @@
 {
     using System;
 
-    internal class Presenter<TView> where TView : class, IView
+    internal abstract class Presenter<TView> where TView : class, IView
     {
-        public Presenter(TView view)
+        protected Presenter(TView view)
         {
             View = view ?? throw new ArgumentNullException(nameof(view));
             View.Initialize += OnViewInitialize;
             View.Load += OnViewLoad;
         }
 
-        public TView View { get; set; }
+        protected TView View { get; set; }
 
         protected virtual void OnViewInitialize(object? sender, EventArgs e) 
         { 

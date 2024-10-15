@@ -61,7 +61,7 @@
             set => lblTime.Text = value;
         }
 
-        public void InvokeInitialize(EventArgs e) => Initialize?.RaiseEvent(this, e);
+        private void InvokeInitialize(EventArgs e) => Initialize?.RaiseEvent(this, e);
 
         private void OnAddActivity(object sender, EventArgs e) => AddActivity?.RaiseEvent(sender, e);
 

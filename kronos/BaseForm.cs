@@ -3,12 +3,12 @@
     using System;
     using System.Windows.Forms;
 
-    public partial class BaseForm : Form
+    public abstract partial class BaseForm : Form
     {
         private bool _viewLogged = false;
         private DateTime _openTime = DateTime.UtcNow;
 
-        public BaseForm()
+        protected BaseForm()
         {
             InitializeComponent();
         }

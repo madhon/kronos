@@ -6,7 +6,7 @@
 
     public class KronosConfigurationInstance
     {
-        private static readonly Lazy<KronosConfiguration> lazy = new Lazy<KronosConfiguration>(() => new KronosConfiguration());
+        private static readonly Lazy<KronosConfiguration> lazy = new(() => new KronosConfiguration());
 
         public KronosConfiguration Config { get; set; }
 

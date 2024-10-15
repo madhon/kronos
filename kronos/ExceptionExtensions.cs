@@ -9,8 +9,7 @@
         {
             while (true)
             {
-                var tiex = ex as TargetInvocationException;
-                if (tiex == null)
+                if (ex is not TargetInvocationException tiex)
                 {
                     return ex;
                 }
