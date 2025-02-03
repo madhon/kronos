@@ -9,30 +9,30 @@ using System.Windows.Forms;
 [ProvideProperty("DetermineAvailability", typeof(Control))]
 public sealed class AvailabilityExtender : Component, IExtenderProvider
 {
-    private readonly Dictionary<Control, bool> _oConfigurationTable;
+    private readonly Dictionary<Control, bool> _oConfigurationTable = new();
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public AvailabilityState StateOfExtender { get; private set; }
 
-    public AvailabilityExtender() => _oConfigurationTable = new Dictionary<Control, bool>();
+    public AvailabilityExtender() { }
 
     public bool CanExtend(object extendee)
     {
-        var flag = extendee is Control;
-        return ((!(extendee is Form) && !(extendee is Panel)) && flag);
+        if (extendee is Form || extendee is Panel)
+        {
+            return false;
+        }
+        return extendee is Control;
     }
 
     [DefaultValue(false)]
     public bool GetDetermineAvailability(Control control)
     {
-#pragma warning disable CS0183 // 'is' expression's given expression is always of the provided type
-        if (_oConfigurationTable[control] is object)
-#pragma warning restore CS0183 // 'is' expression's given expression is always of the provided type
+        if (!_oConfigurationTable.TryGetValue(control, out bool value))
         {
             return false;
         }
-
-        return (bool)_oConfigurationTable[control];
+        return value;
     }
 
     public void IndicateAvailable()
@@ -79,7 +79,9 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
         {
             var current = (Control)iter.Current!;
             if (current is IAvailability)
+            {
                 ((IAvailability)current).SetState(availability);
+            }
             else
             {
                 switch (availability)
@@ -89,21 +91,21 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
                         current.BackColor = SystemColors.Control;
                         current.ForeColor = SystemColors.Control;
                         current.Enabled = false;
-                        continue;
+                        break;
                     }
                     case AvailabilityState.Available:
                     {
                         current.BackColor = SystemColors.Window;
                         current.ForeColor = SystemColors.ControlText;
                         current.Enabled = true;
-                        continue;
+                        break;
                     }
                     case AvailabilityState.Disabled:
                     case AvailabilityState.ReadOnly:
                     {
                         current.BackColor = SystemColors.Window;
                         current.Enabled = false;
-                        continue;
+                        break;
                     }
                 }
             }
@@ -116,9 +118,12 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
         {
             _oConfigurationTable[oControl] = true;
         }
-        else if (_oConfigurationTable.ContainsKey(oControl))
+        else
         {
-            _oConfigurationTable.Remove(oControl);
+            if (_oConfigurationTable.ContainsKey(oControl))
+            {
+                _oConfigurationTable.Remove(oControl);
+            }
         }
     }
 
