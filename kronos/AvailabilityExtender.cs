@@ -11,6 +11,7 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
 {
     private readonly Dictionary<Control, bool> _oConfigurationTable;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public AvailabilityState StateOfExtender { get; private set; }
 
     public AvailabilityExtender() => _oConfigurationTable = new Dictionary<Control, bool>();
@@ -76,7 +77,7 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
     {
         while (iter.MoveNext())
         {
-            Control current = (Control)iter.Current;
+            var current = (Control)iter.Current!;
             if (current is IAvailability)
                 ((IAvailability)current).SetState(availability);
             else
@@ -130,7 +131,7 @@ public sealed class AvailabilityExtender : Component, IExtenderProvider
     {
         while (iter.MoveNext())
         {
-            Control current = (Control)iter.Current;
+            var current = (Control)iter.Current!;
             current.Visible = visible;
         }
     }

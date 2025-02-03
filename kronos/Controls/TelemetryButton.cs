@@ -6,9 +6,13 @@
 
     public class TelemetryButton : Button
     {
-        [EditorBrowsable] public string EventName { get; set; } = string.Empty;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [EditorBrowsable]
+        public string EventName { get; set; } = string.Empty;
 
-        [EditorBrowsable] public bool IsTimed { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [EditorBrowsable]
+        public bool IsTimed { get; set; }
 
         protected override void OnClick(EventArgs e)
         {

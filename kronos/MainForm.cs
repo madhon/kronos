@@ -1,6 +1,7 @@
 ﻿namespace Kronos
 {
     using System;
+    using System.ComponentModel;
     using System.Windows.Forms;
 
     internal sealed partial class MainForm : BaseForm, IMainFormView
@@ -43,18 +44,21 @@
 
         public event EventHandler? AddActivity = delegate { };
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Activity
         {
             get => txtAct.Text;
             set => txtAct.Text = value;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ActivityLog
         {
             get => txtActLog.Text;
             set => txtActLog.Text = value;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Time
         {
             get => lblTime.Text;
