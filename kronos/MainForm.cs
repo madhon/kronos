@@ -44,21 +44,21 @@
 
         public event EventHandler? AddActivity = delegate { };
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Activity
         {
             get => txtAct.Text;
             set => txtAct.Text = value;
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ActivityLog
         {
             get => txtActLog.Text;
             set => txtActLog.Text = value;
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Time
         {
             get => lblTime.Text;
