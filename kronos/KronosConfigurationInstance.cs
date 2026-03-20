@@ -1,23 +1,22 @@
-﻿namespace Kronos
+﻿namespace Kronos;
+
+using System;
+using System.IO;
+using System.Text.Json;
+
+public class KronosConfigurationInstance
 {
-    using System;
-    using System.IO;
-    using System.Text.Json;
+    private static readonly Lazy<KronosConfiguration> lazy = new(() => new KronosConfiguration());
 
-    public class KronosConfigurationInstance
+    public KronosConfiguration Config { get; set; }
+
+    public static KronosConfiguration Instance => lazy.Value;
+
+    private KronosConfigurationInstance()
     {
-        private static readonly Lazy<KronosConfiguration> lazy = new Lazy<KronosConfiguration>(() => new KronosConfiguration());
+        var configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+            "Madhon", "Kronos", "appSettings.json");
 
-        public KronosConfiguration Config { get; set; }
-
-        public static KronosConfiguration Instance => lazy.Value;
-
-        private KronosConfigurationInstance()
-        {
-            var configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                "Madhon", "Kronos", "appSettings.json");
-
-            Config = JsonSerializer.Deserialize<KronosConfiguration>(File.ReadAllText(configFile), KronosConfigurationSerializationContext.Default.KronosConfiguration)!;
-        }
+        Config = JsonSerializer.Deserialize<KronosConfiguration>(File.ReadAllText(configFile), KronosConfigurationSerializationContext.Default.KronosConfiguration)!;
     }
 }

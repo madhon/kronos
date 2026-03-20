@@ -8,7 +8,7 @@
         private bool _viewLogged = false;
         private DateTime _openTime = DateTime.UtcNow;
 
-        public BaseForm()
+        protected BaseForm()
         {
             InitializeComponent();
         }
@@ -26,15 +26,10 @@
             base.OnLoad(e);
         }
 
-        /// <summary>
-        /// Raises the <see cref="E:Closed" /> event.
-        /// </summary>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        protected override void OnClosed(EventArgs e)
+        protected override void OnFormClosed(FormClosedEventArgs e)
         {
             LogPageView();
-
-            base.OnClosed(e);
+            base.OnFormClosed(e);
         }
 
         private void LogPageView()

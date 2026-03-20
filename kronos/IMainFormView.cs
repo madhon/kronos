@@ -1,15 +1,14 @@
-﻿namespace Kronos
+﻿namespace Kronos;
+
+using System;
+
+internal interface IMainFormView : IView
 {
-    using System;
+    event EventHandler? AddActivity;
 
-    internal interface IMainFormView : IView
-    {
-        event EventHandler? AddActivity;
+    string Activity { get; set; }
 
-        string Activity { get; set; }
+    string ActivityLog { get; set; }
 
-        string ActivityLog { get; set; }
-
-        string Time { get; set; }
-    }
+    string Time { get; set; }
 }

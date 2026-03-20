@@ -1,10 +1,9 @@
-﻿namespace Kronos
+﻿namespace Kronos;
+
+public enum AvailabilityState
 {
-    public enum AvailabilityState
-    {
-        Unavailable,
-        Available,
-        Disabled,
-        ReadOnly
-    }
+    Unavailable,
+    Available,
+    Disabled,
+    ReadOnly
 }

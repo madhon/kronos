@@ -1,24 +1,27 @@
-﻿namespace Kronos.Controls
+﻿namespace Kronos.Controls;
+
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+
+public class TelemetryButton : Button
 {
-    using System;
-    using System.ComponentModel;
-    using System.Windows.Forms;
+    [EditorBrowsable]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public string EventName { get; set; } = string.Empty;
 
-    public class TelemetryButton : Button
+    [EditorBrowsable]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public bool IsTimed { get; set; }
+
+    protected override void OnClick(EventArgs e)
     {
-        [EditorBrowsable] public string EventName { get; set; } = string.Empty;
+        var startTime = DateTime.UtcNow;
+        base.OnClick(e);
 
-        [EditorBrowsable] public bool IsTimed { get; set; }
-
-        protected override void OnClick(EventArgs e)
+        if (IsTimed)
         {
-            var startTime = DateTime.UtcNow;
-            base.OnClick(e);
-
-            if (IsTimed)
-            {
-                var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
-            }
+            var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
         }
     }
 }

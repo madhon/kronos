@@ -1,22 +1,20 @@
-﻿namespace Kronos
+﻿namespace Kronos;
+
+using System;
+using System.Reflection;
+
+internal static class ExceptionExtensions
 {
-    using System;
-    using System.Reflection;
-
-    internal static class ExceptionExtensions
+    public static Exception UnWrap(this Exception ex)
     {
-        public static Exception UnWrap(this Exception ex)
+        while (true)
         {
-            while (true)
+            if (ex is not TargetInvocationException tiex)
             {
-                var tiex = ex as TargetInvocationException;
-                if (tiex == null)
-                {
-                    return ex;
-                }
-
-                ex = tiex.InnerException!;
+                return ex;
             }
+
+            ex = tiex.InnerException!;
         }
     }
 }

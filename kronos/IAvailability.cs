@@ -1,7 +1,6 @@
-﻿namespace Kronos
+﻿namespace Kronos;
+
+public interface IAvailability
 {
-    public interface IAvailability
-    {
-        void SetState(AvailabilityState state);
-    }
+    void SetState(AvailabilityState state);
 }
